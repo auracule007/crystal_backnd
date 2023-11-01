@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+ <!-- carousel -->
+        
+ {% block navbar %}
+    {% include 'navbar.html' %}
+ {% endblock navbar %}
+     
+<!-- carousel done -->
+
+<!-- content -->
+ {% block content %}
+
+
+ <div class="container mt-5 mb-5">
+    <div class="mt-5 mb-5 seeze d-none d-md-block">
+      <a href="/"><i class="fa-solid fa-arrow-left"></i></a>
+    </div>
+    <div class="row justify-content-center gy-4">
+      <div class="col-12 col-md-10 col-lg-6">
+        <img
+          src="{{product.stockImg.url}}"
+          class="w-100 rounded"
+          alt=""
+        />
+      </div>
+      <div class="col-12 col-md-10 col-lg-6">
+        <div class="container">
+          <div class="mt-2 mb-2 border-bottom">
+            <h2><b>{{product.name}}</b></h2>
+          </div>
+          <div class="mt-2 mb-2">
+            <h2 class="duo"><b>₦{{product.stockPrice}}</b></h2>
+          </div>
+          <p>Your rating: <span id="selected-rating">0</span></p>
+
+          <div class="d-flex mb-4 align-items-center rating" id="rating">
+            <span class="star" data-value="1"
+              ><i class="fa-solid fa-star"></i
+            ></span>
+            <span class="star" data-value="2"
+              ><i class="fa-solid fa-star"></i
+            ></span>
+            <span class="star" data-value="3"
+              ><i class="fa-solid fa-star"></i
+            ></span>
+            <span class="star" data-value="4"
+              ><i class="fa-solid fa-star"></i
+            ></span>
+            <span class="star" data-value="5"
+              ><i class="fa-solid fa-star"></i
+            ></span>
+            <span>(0 customers review)</span>
+          </div>
+
+          <div class="cform">
+            <form action="{% url 'shopcart' product.id %}" method="POST">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="">Colors</label>
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  name="color"
+                >
+                  <option selected>Select Colors</option>
+                  <option value="red">Red</option>
+                  <option value="blue">Blue</option>
+                  <option value="green">Green</option>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label for="">Sizes</label>
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  name="size"
+                >
+                  <option selected>Select Size</option>
+                  <option value="M">M</option>
+                  <option value="L">L</option>
+                  <option value="XL">XL</option>
+                  <option value="XXL">XXL</option>
+                </select>
+              </div>
+            <!-- </form> -->
+          </div>
+
+          <div class="mb-4 games">
+            <h4 class="pb-1">Share this product</h4>
+            <div class="d-flex">
+              <span class="pe-1 fs-3"
+                ><a href="" id="whatsapp-button"
+                  ><i class="fa-brands fa-whatsapp"></i></a
+              ></span>
+              <span class="ps-3 fs-3"
+                ><a href="" id="twitter-button"
+                  ><i class="fa-brands fa-x-twitter"></i></a
+              ></span>
+            </div>
+          </div>
+
+          <!--  -->
+          <div class="d-flex gamer">
+            <h5 class="pe-4"><b>TAG:</b></h5>
+            <div class="row gy-3">
+              <div class="col-7 col-md-3"><a href="">Luxury wears</a></div>
+              <div class="col-3"><a href="">Bags</a></div>
+              <div class="col-3"><a href="">glasses</a></div>
+              <div class="col-3"><a href="">jean</a></div>
+            </div>
+          </div>
+
+          <div class="d-flex btn-box">
+            <a href="{% url 'index' %}" class="btn w-100 p-2 p-md-3 mt-5 m-1 yolo"
+              ><small>Continue Shopping</small></a
+            >
+            <input type="hidden" name="product_id" value="{{product.id}}">
+            <div class="mb-1">
+              <input type="hidden" name="quantity" value="{{product.minQuantity}}" id="">
+            </div>
+            <button type="submit" class="btn w-100 p-2 p-md-3 mt-5 m-1 yolo">
+              Cart
+            </button>
+          </div>
+        </div>
+      </form>
+        <!--  -->
+      </div>
+    </div>
+
+    <!--  -->
+    <div class="container mt-5 mb-5">
+      <div class="card">
+        <div class="card-header godoffire">
+          <h4><b>Product Description</b></h4>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"></h5>
+          <p class="card-text"></p>
+          <a href="#" class="btn btn-primary"></a>
+        </div>
+      </div>
+    </div>
+    <!--  -->
+
+    <!--  -->
+    <div class="container mt-5 mb-5">
+      <div class="card">
+        <div class="card-header godoffire">
+          <h4><b>Reviews(0)</b></h4>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"></h5>
+          <p class="card-text"></p>
+          <!-- <a href="#" class="btn btn-primary"></a> -->
+        </div>
+      </div>
+    </div>
+    <!--  -->
+  </div>
+     
+ {% endblock content %}
+
+ <!-- content done -->
+
+ <!-- footer -->
+ {% block footer %}
+    {% include 'footer.html' %}
+ {% endblock footer %}
+<!-- footer done -->
+
+<!-- details modal -->   
+ {% block detail_modal %}
+     {% include 'detail_modal.html' %}
+ {% endblock detail_modal %}       
+<!-- details modal done -->
+
+<!-- signin/signup -->
+ {% block signup_signin %}
+    {% include 'signin_signup.html' %}
+ {% endblock signup_signin %}
+<!-- signin/signup done -->
+
+<!-- cart/checkout/payment/ -->
+ {% block cart_checkout %}
+     {% include 'cart_checkout.html' %}
+ {% endblock cart_checkout %}
+<!-- cart/checkout/payment/ done small screen -->

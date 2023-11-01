@@ -1,0 +1,84 @@
+<div class="container mt-5 mb-5">
+  <!-- navv -->
+  <span class="d-none d-md-block">
+    <div class="row justify-content-center gy-2">
+      <div class="col-12 col-md-2">
+        <h2>Collections</h2>
+      </div>
+      <div class="col-12 col-md-2">
+        <a href="" class="btn susu w-100 p-1 p-md-3 rounded"><b>All</b></a>
+      </div>
+      {% for items in category %}
+      <div class="col-12 col-md-2">
+        <a href="" class="btn susu w-100 p-1 p-md-3 rounded"
+          ><b>{{items.name}}</b></a
+        >
+      </div>
+      {% endfor %}
+      <!-- <div class="col-12 col-md-2">
+          <a href="" class="btn susu w-100 p-1 p-md-3 rounded"><b>Cap</b></a>
+        </div> -->
+      <!-- <div class="col-12 col-md-2">
+          <a href="" class="btn susu w-100 p-1 p-md-3 rounded"> <b>Bags</b></a>
+        </div> -->
+      <!-- <div class="col-12 col-md-2">
+          <a href="" class="btn susu w-100 p-1 p-md-3 rounded"><b>Glasses</b></a>
+        </div> -->
+    </div>
+  </span>
+  <!-- navv -->
+  <!-- nv22 -->
+  <div
+    class="accordion accordion-flush d-block d-md-none"
+    id="accordionFlushExample"
+  >
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="flush-headingOne">
+        <button
+          class="accordion-button collapsed susu"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#flush-collapseOne"
+          aria-expanded="false"
+          aria-controls="flush-collapseOne"
+        >
+          <b>Collections</b>
+        </button>
+      </h2>
+      <div
+        id="flush-collapseOne"
+        class="accordion-collapse collapse"
+        aria-labelledby="flush-headingOne"
+        data-bs-parent="#accordionFlushExample"
+      >
+        <div class="accordion-body">
+          <div class="row justify-content-center gy-2">
+            <!-- <div class="col-12 col-md-2">
+                <a href="" class="btn susu w-100 p-1 p-md-3 rounded"><b>All</b></a>
+              </div> -->
+
+            {% for items in category %}
+            <div class="col-12 col-md-2">
+              <a href="" class="btn susu w-100 p-1 p-md-3 rounded"
+                ><b>{{items.name}}</b></a
+              >
+            </div>
+            {% endfor %}
+
+            <!-- <div class="col-12 col-md-2">
+                <a href="" class="btn susu w-100 p-1 p-md-3 rounded"><b>Cap</b></a>
+              </div> -->
+            <!-- <div class="col-12 col-md-2">
+                <a href="" class="btn susu w-100 p-1 p-md-3 rounded"> <b>Bags</b></a>
+              </div> -->
+            <!-- <div class="col-12 col-md-2">
+                <a href="" class="btn susu w-100 p-1 p-md-3 rounded"><b>Glasses</b></a>
+              </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  -->
+  </div>
+  <!-- nv22 done -->
+</div>

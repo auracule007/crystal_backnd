@@ -1,0 +1,95 @@
+Documenting my django project
+
+python -m pip install Sphinx
+
+
+sphinx-quickstart 
+then select yes
+select your project name 
+select your project author 
+select your project language (en)
+
+go to settings.py add sphinix to the installed-app 
+
+then on the config add 
+import os 
+import sys 
+import django 
+
+sys.path.insert(0, os.path.abspath('..'))
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'crystal.settings')
+django.setup()
+
+make html 
+sphinx-build -b html source build 
+
+
+
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script> -->
+    <!-- .get("/modal_details/:id/") -->
+    <!-- <script>
+      const btn = document.querySelector("#checkbtn");
+      const container = document.querySelector("#checkout");
+
+      btn.addEventListener("click", () => {
+        axios
+          .get(`/modal_details/${items.id}`)
+          .then((resp) => {
+            container.innerHTML = resp.data;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      });
+    </script> -->
+
+    <!-- <script>
+      function openModal(item_id) {
+        fetch(`/modal_details/${item_id}/`)
+          .then((response) => response.json())
+          .then((data) => {
+            // Update modal content with data received from the server
+            document.querySelector("#exampleModalLabel").innerText = data.name;
+            document.querySelector("img").src = data.stockImg;
+            document.querySelector(".mb-2").innerText = `#${data.stockPrice}`;
+            // Add more data to your modal as needed
+
+            // Show the modal
+            $("#firstmodal").modal("show");
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+    </script> -->
+
+
+
+
+<script>
+    // Function to open the modal and load item details
+    function openItemModal(event) {
+        const itemID = event.relatedTarget.getAttribute('data-item-id');
+        const modal = new bootstrap.Modal(document.getElementById(`modal${itemID}`));
+        const modalContent = document.querySelector(`#modal${itemID} .modal-content`);
+
+        // Define the URL to get item details
+        const itemDetailsURL = `/modal_details/${itemID}/`;
+
+        // Use Axios to fetch item details
+        axios.get(itemDetailsURL)
+            .then((response) => {
+                modalContent.innerHTML = response.data;
+                modal.show();
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
+    // Add a listener to all elements with the 'data-bs-toggle' attribute
+    document.querySelectorAll('[data-bs-toggle="modal"]').forEach((element) => {
+        element.addEventListener('click', openItemModal);
+    });
+</script>

@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+ <!-- carousel -->
+        
+ {% block navbar %}
+    {% include 'navbar.html' %}
+ {% endblock navbar %}
+     
+<!-- carousel done -->
+
+<!-- catelog -->
+{% block catelog %}
+    {% include 'catelog.html' %}
+{% endblock catelog %}
+<!-- catelog done -->
+
+<!-- content -->
+ {% block content %}
+
+
+  <div class="container mt-2 mb-2">
+    <div class="row justify-content-center gy-3">
+      
+      {% for item in mygoods_good %}
+      <div class="col-6 col-md-6 col-lg-3">
+        <div class="card sosa">
+          
+            <img
+            src="{{item.stockImg.url}}"
+            class="card-img-top rounded checkbtn"
+            alt="..."
+            data-bs-toggle="modal"
+            data-bs-target="#productModal{{item.slug}}"
+            />
+            <!-- data-item-id="{{items.id}}" -->
+            <!-- data-bs-target="#{{items.id}}" -->
+          
+          <div class="card-body">
+            <p class="card-text">{{item.name}}</p>
+            <p class="card-text"><b>#{{item.stockPrice}}</b></p>
+            <!-- <a href="#" class="btn susu w-100 p-3 rounded">Add to Cart</a> -->
+            <a
+              href="{% url 'product_details' item.slug %}"
+              class="btn susu w-100 p-1 p-md-3 rounded" 
+            >
+              Add to Cart
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+      <div class="container justify-content-center mx-auto">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">      
+              {% if mygoods_good.has_previous %}
+                  <li class="page-item">
+                      <a class="page-link" href="?page={{mygoods_good.previous_page_number}}" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                      </a>
+                  </li>
+              {% else %}
+                  <li class="page-item">
+                      <a class="page-link" href="?page=1" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                      </a>
+                  </li>
+              {% endif %}
+                  
+              
+              {% for item in mygoods_good.paginator.page_range %}
+                  
+                  {% if mygoods_good.number == item %}
+                      <li class="page-item"><a class="page-link" href="#">{{item}}</a></li>
+                  {% else %}
+                      <li class="page-item"><a class="page-link" href="?page={{item}}">{{item}}</a></li>
+                  {% endif %}
+                      
+              {% endfor %}
+                  
+              
+              {% if mygoods_good.has_next %}
+                  <li class="page-item">
+                      <a class="page-link" href="?page={{mygoods_good.next_page_number}}" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                      </a>
+                  </li>
+              {% else %}
+                  <li class="page-item">
+                      <a class="page-link" href="?page={{mygoods_good.paginator.num_pages}}" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                      </a>
+                  </li>
+              {% endif %}   
+          </ul>
+        </nav>
+      </div>
+      
+    </div>
+  </div>
+     
+ {% endblock content %}
+ <!-- content done -->
+
+ <!-- footer -->
+  {% block footer %}
+      {% include 'footer.html' %}
+  {% endblock footer %}
+<!-- footer done -->
+
+<!-- detailed_modal -->
+  {% block detail_modal %}
+    {% include 'detail_modal.html' %}
+  {% endblock detail_modal %}
+<!-- detailed_modal done -->
+
+<!-- signin/signup -->
+ {% block signup_signin %}
+    {% include 'signin_signup.html' %}
+ {% endblock signup_signin %}
+<!-- signin/signup done -->
+
+<!-- cart/checkout/payment/ -->
+ {% block cart_checkout %}
+     {% include 'cart_checkout.html' %}
+ {% endblock cart_checkout %}
+<!-- cart/checkout/payment/ done small screen -->

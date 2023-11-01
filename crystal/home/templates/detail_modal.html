@@ -1,0 +1,65 @@
+
+{% for item in mygoods_good %}
+<div class="modal fade" id="productModal{{item.slug}}" tabindex="-1" aria-labelledby="productModalLabel{{item.slug}}" aria-hidden="true" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="productModalLabel{{item.slug}}">
+                    <b>{{item.name}}</b>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-6">
+                        <img src="{{item.stockImg.url}}" alt="" class="w-100 h-75" />
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="mb-4">
+                            <h4 class="mb-2">{{item.name}}</h4>
+                            <h5 class="mb-2"><b>#{{item.stockPrice}}</b></h5>
+                            <a href="{% url 'product_details' item.id %}" class="mb-2">view more details</a>
+                        </div>
+                        <div class="cform">
+                            <form action="{% url 'shopcart' item.id %}" method="POST">
+                            {% csrf_token %}
+                                <div class="mb-3">
+                                    <select class="form-select" name="color" aria-label="Default select example">
+                                        <option selected>Select Colors</option>
+                                        <option value="Red">Red</option>
+                                        <option value="Blue">Blue</option>
+                                        <option value="Green">Green</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <select class="form-select" name="size" aria-label="Default select example">
+                                        <option selected>Select Size</option>
+                                        <option value="M">M</option>
+                                        <option value="L">L</option>
+                                        <option value="XL">XL</option>
+                                        <option value="XXL">XXL</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="d-flex btn-box">
+                                    <!-- <a href="{% url 'index' %}" class="btn w-100 p-2 p-md-3 mt-5 m-1 yolo"
+                                      ><small>Continue Shopping</small></a
+                                    > -->
+                                    <input type="hidden" name="product_id" value="{{item.id}}">
+                                    <div class="mb-3">
+                                      <input type="hidden" name="quantity" value="{{item.minQuantity}}" id="">
+                                    </div>
+                                    <button type="submit" class="btn w-100 p-2 p-md-3 mt-1 m-1 yolo">
+                                      Cart
+                                    </button>
+                                  </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}

@@ -1,0 +1,326 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% load humanize %}
+ <!-- carousel -->
+        
+ {% block navbar %}
+    {% include 'navbar.html' %}
+ {% endblock navbar %}
+     
+<!-- carousel done -->
+
+<!-- content -->
+ {% block content %}
+
+ 
+ <div class="border-bottom p-4">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <button type="submit" class="btn w-100 p-1 p-sm-3 yoloss" id="profile">
+          My Account
+        </button>
+      </div>
+      <div class="col-4">
+        <button type="submit" class="btn w-100 p-1 p-sm-3 yoloss" id="orders">
+          My Orders
+        </button>
+      </div>
+      <div class="col-4">
+        <button
+          type="submit"
+          class="btn w-100 p-1 p-sm-3 yoloss"
+          id="reviews"
+        >
+          Pending Reviews
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5 mb-5" id="profile-container">
+  <!-- profile -->
+  <form action="{% url 'profile_update' %}" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="row justify-content-center gy-4">
+    <div class="col-12 col-md-4">
+      <div class="img text-center">
+        <img src="{{profile.pix.url}}" class="w-50 h-50 rounded" alt="" />
+        <!-- <a href="" class="btn w-100 p-3 mt-5 yolo">Edit Profile</a> -->
+        <button type="submit" class="btn p-3 mt-5 w-100 btn-outline-danger d-none d-md-block">Edit Profile</button>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-8">
+      <h4 class="border-bottom pb-4"><b>Personal Information</b></h4>
+      <div class="cform pt-4">
+          <div class="row justify-content-center">
+            <div class="col-12 col-md-6">
+              <div class="mb-3">
+                <label for="exampleInputText1" class="form-label"
+                  >First Name</label
+                >
+                <input
+                  type="text"
+                  class="form-control p-3"
+                  placeholder="Username"
+                  id="exampleInputText1"
+                  aria-describedby="emailHelp"
+                  name="first_name"
+                  value="{{profile.first_name}}"
+                />
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="mb-3">
+                <label for="exampleInputText1" class="form-label"
+                  >Last Name</label
+                >
+                <input
+                  type="text"
+                  class="form-control p-3"
+                  placeholder="Username"
+                  id="exampleInputText1"
+                  aria-describedby="emailHelp"
+                  name="last_name"
+                  value="{{profile.last_name}}"
+                />
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="mb-3">
+                <label for="exampleInputText1" class="form-label"
+                  >Username</label
+                >
+                <input
+                  type="text"
+                  class="form-control p-3"
+                  placeholder="Username"
+                  id="exampleInputText1"
+                  aria-describedby="emailHelp"
+                  value="{{profile.user.username}}"
+                />
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <div class="mb-3">
+                <label for="exampleInputText1" class="form-label"
+                  >Email Address</label
+                >
+                <input
+                  type="text"
+                  class="form-control p-3"
+                  placeholder="Username"
+                  id="exampleInputText1"
+                  aria-describedby="emailHelp"
+                  name="email"
+                  value="{{profile.email}}"
+                />
+              </div>
+            </div>
+
+            <div class="col-12 col-md-12">
+              <div class="mb-3">
+                <label for="exampleInputText1" class="form-label"
+                  >Phone Number</label
+                >
+                <input
+                  type="text"
+                  class="form-control p-3"
+                  placeholder="Username"
+                  id="exampleInputText1"
+                  aria-describedby="emailHelp"
+                  name="phone"
+                  value="{{profile.phone}}"
+                />
+              </div>
+            </div>
+            <div class="col-12 col-md-12">
+              <div class="mb-3">
+                <label for="exampleInputText1" class="form-label"
+                  >Home Address</label
+                >
+                <input
+                  type="text"
+                  class="form-control p-3"
+                  placeholder="Username"
+                  id="exampleInputText1"
+                  aria-describedby="emailHelp"
+                  name="address"
+                  value="{{profile.address}}"
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  type="file"
+                  class="form-control p-3"
+                  placeholder="Username"
+                  id="exampleInputText1"
+                  aria-describedby="emailHelp"
+                  name="pix"
+                />
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <div class="mb-3">
+                <label for="exampleInputText1" class="form-label"
+                  >City</label
+                >
+                <input
+                  type="text"
+                  class="form-control p-3"
+                  placeholder="Username"
+                  id="exampleInputText1"
+                  aria-describedby="emailHelp"
+                  name="city"
+                  value ="{{profile.city}}"
+                />
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <div class="mb-3">
+                <label for="exampleInputText1" class="form-label"
+                  >State</label
+                >
+                <input
+                  type="text"
+                  class="form-control p-3"
+                  placeholder="Username"
+                  id="exampleInputText1"
+                  aria-describedby="emailHelp"
+                  name="state"
+                  value="{{profile.state}}"
+                />
+              </div>
+
+              <div class="mb-3">
+                <button type="submit" class="btn p-3 mt-5 w-50 btn-outline-danger d-block d-md-none">Edit Profile</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<!-- profile done -->
+
+<!-- orders -->
+<div class="container" id="orders-container">
+  <h3 class="text-center pb-3 pt-3"><b>Recent Orders</b></h3>
+
+  <table class="table table-hover table-responsive border-none">
+    <thead>
+      <tr>
+        <th scope="col">Product</th>
+        <th scope="col">Product Name</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      {% for items in trolley %}
+        <tr>
+          <td><img src="{{items.product.stockImg.url}}" width="50px" height="50px" alt=""></td>
+          <td>{{items.product.name}}</td>
+          <td>{{items.quantity}}</td>
+          <td>#{{items.amount|floatformat:2|intcomma}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+
+    <div class="table">
+      <tbody>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>Subtotal: {{subtotal|floatformat:2|intcomma}}</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>vat(7.5%): {{vat|floatformat:2}}</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>Total: {{total|floatformat:2|intcomma}}</td>
+        </tr>
+      </tbody>
+    </div>
+  </table>
+
+  <!-- </div> -->
+  <!-- orders -->
+
+  <!-- pending -->
+  <div class="container orders" id="reviews-container">
+    <h3 class="text-center pb-3"><b>Orders Content</b></h3>
+  </div>
+
+  <!-- pending done -->
+</div>
+
+<!-- content done -->
+
+
+
+
+<!-- profile Update  -->
+<!-- profile Update done  -->
+     
+ {% endblock content %}
+
+ <!-- content done -->
+
+ <!-- footer -->
+ {% block footer %}
+    {% include 'footer.html' %}
+ {% endblock footer %}
+<!-- footer done -->
+
+<!-- details modal -->   
+ {% block detail_modal %}
+     {% include 'detail_modal.html' %}
+ {% endblock detail_modal %}       
+<!-- details modal done -->
+
+<!-- signin/signup -->
+ {% block signup_signin %}
+    {% include 'signin_signup.html' %}
+ {% endblock signup_signin %}
+<!-- signin/signup done -->
+
+<!-- cart/checkout/payment/ -->
+ {% block cart_checkout %}
+     {% include 'cart_checkout.html' %}
+ {% endblock cart_checkout %}
+<!-- cart/checkout/payment/ done small screen -->

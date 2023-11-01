@@ -1,0 +1,349 @@
+{% load static %}
+
+<div class="kevin">
+  <div class="loader"></div>
+</div>
+
+
+
+<!-- carousel -->
+<div
+  id="carouselExampleDark"
+  class="carousel slide"
+  data-bs-ride="carousel"
+>
+  <div class="carousel-indicators">
+    <button
+      type="button"
+      data-bs-target="#carouselExampleDark"
+      data-bs-slide-to="0"
+      class="active"
+      aria-current="true"
+      aria-label="Slide 1"
+    ></button>
+    <button
+      type="button"
+      data-bs-target="#carouselExampleDark"
+      data-bs-slide-to="1"
+      aria-label="Slide 2"
+    ></button>
+    <button
+      type="button"
+      data-bs-target="#carouselExampleDark"
+      data-bs-slide-to="2"
+      aria-label="Slide 3"
+    ></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item h-100 active" data-bs-interval="10000">
+      <img src="{% static '' %}img/logo2.jpeg" class="d-block w-100" alt="..." />
+      <div class="likkie"></div>
+      <div class="carousel-caption d-md-block">
+        <h1>Hey Baddie</h1>
+        <h5>Welcome to 24/7 Wardrobe.</h5>
+      </div>
+    </div>
+  </div>
+  <button
+    class="carousel-control-prev"
+    type="button"
+    data-bs-target="#carouselExampleDark"
+    data-bs-slide="prev"
+  >
+    <!-- <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button
+    class="carousel-control-next"
+    type="button"
+    data-bs-target="#carouselExampleDark"
+    data-bs-slide="next"
+  >
+    <!-- <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
+    <span class="visually-hidden">Next</span>
+  </button>
+  
+  <!-- header -->
+  <!-- <div class="sticky-top"> -->
+  <nav class="navbar navbar-expand-lg sticky-top d-none d-md-block">
+    <div class="container">
+      <a class="navbar-brand" href="/"
+        ><img src="{% static '' %}img/logo3.jpeg" width="100px" alt=""
+      /></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <form class="d-flex">
+        <input
+          class="form-control me-2 rounded-pill"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
+      </form>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#"
+              ><img src="{% static '' %}img/ngn.png" width="20px" alt=""
+            /></a>
+          </li>
+          
+          {% if user.is_authenticated %}
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <img src="{{profile.pix.url}}" width="30px" alt="" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;" />
+                &nbsp;Hi, {{user.username}}
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <a class="dropdown-item" href="{% url 'profile' %}">My Account</a>
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="{% url 'userSignout' %}">
+                    <i class="fa-solid fa-arrow-right-to-bracket p-2"></i
+                    >Signout</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <!--  -->
+            <li class="nav-item">
+              <a
+                class="nav-link position-relative"
+                href="{% url 'cart' %}"
+                data-bs-toggle="modal"
+                data-bs-target="#cartcheckout"
+              >
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span
+                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                >
+                  9
+                  <span class="visually-hidden">unread messages</span>
+                </span>
+              </a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <!-- href="{{ login_url }}" -->
+              <a
+                class="nav-link"
+                data-bs-toggle="modal"
+                data-bs-target="#authentication"
+                
+                >Create an account</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="#"
+                data-bs-toggle="modal"
+                data-bs-target="#authentication"
+                
+                >login</a
+              >
+            </li>
+          {% endif %}
+            
+          <!-- {% comment %} <li class="nav-item">
+            <a
+              class="nav-link"
+              href="#"
+              data-bs-toggle="modal"
+              data-bs-target="#authentication"
+              id="register"
+              >Create an account</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="#"
+              data-bs-toggle="modal"
+              data-bs-target="#authentication"
+              id="login"
+              >login</a
+            >
+          </li> {% endcomment %} -->
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="#" data-bs-toggle="modal"
+            data-bs-target="#authentication">Login</a>
+          </li> -->
+          <!--  -->
+          <!-- {% comment %} <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <img src="/img/default_icon.jpg" width="30px" alt="" />Hi,
+              Oyetosho
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li>
+                <a class="dropdown-item" href="/profile.html">My Account</a>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" href="#">
+                  <i class="fa-solid fa-arrow-right-to-bracket p-2"></i
+                  >Signout</a
+                >
+              </li>
+            </ul>
+          </li> {% endcomment %} -->
+          <!--  -->
+          <!-- {% comment %} <li class="nav-item">
+            <a
+              class="nav-link position-relative"
+              href="#"
+              data-bs-toggle="modal"
+              data-bs-target="#cartcheckout"
+            >
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+              >
+                9
+                <span class="visually-hidden">unread messages</span>
+              </span>
+            </a>
+          </li> {% endcomment %} -->
+        </ul>
+      </div>
+    </div>
+    <!-- messages -->
+      
+      {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong>{{message}}</strong> 
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+        
+    <!-- messages done -->
+  </nav>
+
+  <!-- </div> -->
+  <!-- header done -->
+  <!-- secondNav  -->
+  <div class="d-block d-md-none sticky-top">
+    <div class="header">
+      <div class="logo">
+        <a href="/"><img src="/img/logo3.jpeg" width="100px" alt="" /></a>
+      </div>
+
+      <div class="navset">
+        <ul>
+          <li class="ps-3">
+            <a href=""><img src="{% static '' %}img/ngn.png" width="20px" alt="" /></a>
+            &nbsp;
+          </li>
+          <li class="">
+            <button type="submit" class="btn gracias">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            <div class="cformk" style="display: none;">
+              <form action="">
+                <div class="d-flex">
+                  <input
+                    type="text"
+                    name=""
+                    id=""
+                    class="form-control gbemi"
+                    
+                    />
+                    <button type="submit" class="btn gracias">
+                      <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                  </div>
+                </form>
+              <!-- </div> -->
+          </li>
+          <li class="dropdown ps-3">
+            <a class="dropdown" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" href="" data-bs-toggle="modal"
+            data-bs-target="#authentication"
+              >
+              {% if user.is_authenticated %}
+                 <img src="{{profile.pix.url}}" style="width: 40px; height: 40px; border-radius: 50%;object-fit: cover;" alt="" />
+              {% else %}
+                  <img src="{% static '' %}img/default_icon.jpg" style="width: 40px; height: 40px; border-radius: 50%;object-fit: cover;" alt="">
+              {% endif %}
+            </a>
+
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              {% if user.is_authenticated %}
+              <li>
+                <a class="dropdown-item w-100" href="{% url 'profile' %}">My Account</a>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" href="{% url 'userSignout' %}">
+                  <i class="fa-solid fa-arrow-right-to-bracket p-2"></i
+                  >Signout</a
+                >
+              </li>
+              {% else %}
+              <li>
+                <a class="dropdown-item" href="{% url 'userLogin' %}" data-bs-toggle="modal" data-bs-target="#authentication"
+                >Signin</a>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" href="{% url 'userReg' %}" data-bs-toggle="modal" data-bs-target="#authentication">
+                  <i class="fa-solid fa-arrow-right-to-bracket p-2"></i
+                  >Register</a
+                >
+              </li>
+              {% endif %}
+                
+            </ul>
+          </li>
+
+
+          <li class="pe-2 ps-2">
+            <a
+              href=""
+              data-bs-toggle="modal"
+              data-bs-target="#cartcheckout2"
+              ><i class="fa-solid fa-cart-shopping"></i
+            ></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- messages -->
+    {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong>{{message}}</strong> 
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+  <!-- messages done -->
+  </div>
+  <!-- seconNav done  -->
+</div>
+
+<!-- carousel done -->

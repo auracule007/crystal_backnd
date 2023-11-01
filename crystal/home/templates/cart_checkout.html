@@ -1,0 +1,459 @@
+<div
+      class="modal fade jayden"
+      
+      id="cartcheckout"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-xl mutiu">
+        <div class="modal-content">
+          <div class="modal-header">
+            
+            <div class="step-row">
+              <div id="progress"></div>
+              <div class="step-col"><small>Step 1</small></div>
+              <div class="step-col"><small>Step 2</small></div>
+              <div class="step-col"><small>Step 3</small></div>
+            </div>
+
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body p-1">
+
+            <!--  -->
+            <div class="container">
+              <div class="flexing">
+                  <!-- content1 -->
+                  <div class="p-2 forms" id="form1">
+                    <!--  -->
+                  
+                  {% for items in trolley %}
+                  <div class="d-flex justify-content-between p-3">
+                    <div class="d-block">
+                      <img src="{{items.product.stockImg.url}}" width="80px" alt="">
+                    </div>
+  
+                    <span class="mt-5">
+                      <div class="d-flex cart-item">
+                        <button class="cart-button minus">-</button>
+                        <span class="item-quantity">1</span>
+                        <button class="cart-button plus">+</button>&nbsp;
+                        <h5><b>#{{items.amount}}</b></h5>
+                    </div>
+                    </span>
+                  </div>
+                  
+                  <div class="pb-3 border-bottom">
+                  <form action="{% url 'delete_cart' %}" method="POST">
+                  {% csrf_token %}
+                    <input type="hidden" name="items_id" value="{{items.id}}">
+                    <button type="submit" class="btn" onclick="return confirm('Are you sure you want to remove item from cart?..')">Remove</button>
+                  </form>
+                  </div>
+                  {% endfor %}
+                  
+                  <div class="d-flex justify-content-between pt-3">
+                    <div>
+                      <form action="{% url 'delallcart' %}" method="POST">
+                      {% csrf_token %}
+                        <input type="hidden" name="allcart">
+                        <button type="submit" class="btn" onclick="return confirm('Do you want to delet cart?..')"><i class="fa-solid fa-trash-can"></i>&nbsp;Empty Cart</button>
+                      </form>
+                      <!-- <a href="" type="submit" class="btn"></a> -->
+                    </div>
+  
+                    
+                    <div>
+                      <span class="d-flex justify-content-between">
+                        <p>Cart Total </p>
+                        <h6><b>#{{total}}</b></h6>
+                      </span>
+                      <span>Shipping fee will be added when checking out.</span>
+                    </div>
+                  </div>
+                  
+                  <!-- dee -->
+                    
+                    <div class="d-flex btn-box">
+                      <a type="button" class="btn w-100 p-3 m-1 yoloss">Continue Shopping</a>
+                      <button type="button" class="btn w-100 m-1 p-3 yoloss" id="Next1">Proceed to checkout</button>
+                    </div>
+                    <!--  -->
+                  </div>
+                  <!-- content1 done -->
+                  
+                  <!-- content1 -->
+                  <div class="p-4 forms" id="form2" style="height: 800px;">
+                    <!--  -->
+                      <h5><b>Shipping address</b></h5>
+                      <div class="border-1 rounded d-block p-2 tukk">
+                          <p><small>Name: Queen Crystal</small></p>
+                          <p><small>Phone: 098765409876</small></p>
+                          <p><small>Email Address: quueennccrryysstaal@info.com</small></p>
+                          <p><small>Address: 23 Crystal Estate, cresent</small></p>
+                          <p><small>City: Mowe</small></p>
+                          <p><small>State: Lagos State</small></p>
+                          <p><small>County: Nigeria</small></p>
+                      </div>
+      
+                      <div class="mt-3 mb-3 polo">
+                        <form action="">
+                          <div class="mb-3">
+                            <input type="radio" name="" id=""> &nbsp;
+                            Use the above Shipping address
+                          </div>
+      
+                          <div class="mb-3 d-block">
+                            <div>
+                              <label for="" class="pb-3">Aditional Note</label>
+                              <textarea name="" class="form-control shadow-none" placeholder="What else do you want to add" id="" cols="30" rows="5"></textarea>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    <!--  -->
+                      <div class="mt-3 mb-3">
+                        <h5><b>Shipping Method</b></h5>
+                        <form action="">
+                          <div class="mb-1 d-flex justify-content-between">
+                            <div>
+                              <input type="radio" name="" id=""> &nbsp;
+                              customer PickUp 
+                            </div>
+                            <p>Free</p>
+                          </div>
+                          <div class="mb-1 d-flex justify-content-between">
+                            <div>
+                              <input type="radio" name="" id=""> &nbsp;
+                              Interstate (Bus) 
+                            </div>
+                            <p>#4000</p>
+                          </div>
+                          <div class="mb-1 d-flex justify-content-between">
+                            <div>
+                              <input type="radio" name="" id=""> &nbsp;
+                              Interstate (Doorstep) 
+                            </div>
+                            <p>#4000</p>
+                          </div>
+                          <div class="mb-1 d-flex justify-content-between">
+                            <div>
+                              <input type="radio" name="" id=""> &nbsp;
+                              Mainland
+                            </div>
+                            <p>#3000</p>
+                          </div>
+                          <div class="mb-1 d-flex justify-content-between">
+                            <div>
+                              <input type="radio" name="" id=""> &nbsp;
+                              Within Island Delivery
+                            </div>
+                            <p>#3000</p>
+                          </div>  
+                        </form>
+                      </div>
+                    <!--  -->
+                    <div class="mt-3 mb-3 d-block bg-light rounded p-2">
+                      <h2 class="text-center">Order Summary</h2>
+                      <div class="d-flex justify-content-between p-3">
+                        <div class="d-flex">
+                          <img src="/img/WhatsApp Image 2023-10-07 at 20.40.53.jpeg" width="80px" alt="">
+                          <span class="p-3">
+                            <h5><b>Barbie sewer</b></h5>
+                            <p>Size: 100</p>
+                          </span>
+                        </div>
+      
+                        <span class="mt-5">
+                          <div class="d-flex cart-item">
+                            <h5><b>#12000</b></h5>
+                        </div>
+                        </span>
+      
+                      </div>
+                      <div>
+                        <span class="d-flex justify-content-between border-top pt-4">
+                          <span>
+                            <p>Shopping fee </p>
+                            <h5>Total Price</h5>
+                          </span>
+                          <span>
+                            <h6><b>#0</b></h6>
+                            <h6><b>#45000</b></h6>
+                          </span>
+                        </span>
+                        
+                        
+                      </div>
+      
+                      <!--  -->
+                    </div>
+                    <!--  -->
+                    <div class="d-flex btn-box">
+                      <button type="button" class="btn w-100 m-1 p-3 yoloss" id="Back1">Back</button>
+                      <button type="button" class="btn w-100 m-1 p-3 yoloss" id="Next2">Checkout</button>
+                    </div>
+                  </div>
+                  <!-- content1 done -->
+                  
+                  <!-- content1 -->
+                    <div class="text-center forms" id="form3">
+                      <h1>Thank you for Partronizing us</h1>
+                      <div class="d-flex btn-box">
+                        <button type="button" id="Back2" class="btn w-100 m-1 p-3 yoloss">Back</button>
+                        <button type="button" class="btn w-100 m-1 p-3 yoloss">Proceed to make payemnt</button>
+                      </div>
+                    </div>            
+                  <!-- content1 done -->
+              </div>
+            </div>
+      
+            <!--  -->
+
+          </div>
+          <!-- -->
+          <div class="modal-footer">
+            <!-- <div class="d-flex justify-content-between">
+              <div>
+                <button type="submit" class="btn me-5 w-100">
+                  <i class="fa-solid fa-trash-can"></i>
+                  Empty Cart 
+                </button>
+              </div>
+
+              <span>
+                <span class="d-flex justify-content-between">Cart Total  <h5>#12000</h5></span>
+                <p>Delivery fee will be added when checking out</p>
+              </span>
+
+            </div> -->
+          </div> 
+        </div>
+      </div>
+    </div>
+    <!-- cart/checkout/payment/ done -->
+   
+   
+    <!-- cart/checkout/payment/ small screen -->
+    <div
+      class="modal fade jayden2"
+      
+      id="cartcheckout2"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog mutiu2">
+        <div class="modal-content">
+          <div class="modal-header">
+            
+            <div class="step-row2">
+              <div id="progress2"></div>
+              <div class="step-col2"><small>Step 1</small></div>
+              <div class="step-col2"><small>Step 2</small></div>
+              <div class="step-col2"><small>Step 3</small></div>
+            </div>
+
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body p-1">
+
+            <!--  -->
+            <div class="container">
+              <div class="flexing2">
+                  <!-- content1 -->
+                  <div class="p-1 forms" id="Form1" style="height: 500px;">
+                    <!--  -->
+                    <div class="card w-100">
+                      <span class="d-flex justify-content-between">
+                        <img src="/img/WhatsApp Image 2023-10-07 at 20.40.52 (2).jpeg" alt="" class="card-img-top ps-3 pt-2" style="width: 80px;">
+                        <div>
+                          <div class="d-flex cart-item">
+                            <button class="cart-button minus">-</button>
+                            <span class="item-quantity">1</span>
+                            <button class="cart-button plus">+</button>&nbsp;
+                          </div>
+                          <h5><b>#12000</b></h5>
+                        </div>
+                      </span>
+                      <div class="card-body">
+                        <span class="d-flex justify-content-between">
+                          <div class="pb-3">
+                            <button type="submit" class="btn">Remove</button>
+                          </div>
+                  
+                          <div>
+                            <a href="" type="submit" class="btn"
+                              ><i class="fa-solid fa-trash-can"></i>&nbsp;Empty
+                              Cart</a>
+                          </div>
+                        </span>
+                  
+                        <span class="d-flex justify-content-between border-top pt-4 pb-3">
+                          <p>Cart Total</p>
+                          <h6><b>#45000</b></h6>
+                        </span>
+                        <span><small>Shipping fee will be added when checking out</small>.</span>
+                  
+                        <div class="d-flex btn-box">
+                          <a type="button" href="/details.html" class="btn w-75 w-md-100 p-1 p-md-3 m-1 susu">
+                            Continue Shopping
+                          </a>
+                          <button type="button" class="btn w-75 w-md-100 p-1 p-md-3 m-1 susu" id="next1">
+                            Next
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <!--  -->
+                  </div>
+                  <!-- content1 done -->
+                  
+                  <!-- content1 -->
+                  <div class="p-4 forms" id="Form2" style="height: 800px;">
+                    <!--  -->
+                      <h5><b>Shipping address</b></h5>
+                      <div class="border-1 rounded d-block p-2 tukk">
+                          <p><small>Name: Queen Crystal</small></p>
+                          <p><small>Phone: 098765409876</small></p>
+                          <p><small>Email Address: quueennccrryysstaal@info.com</small></p>
+                          <p><small>Address: 23 Crystal Estate, cresent</small></p>
+                          <p><small>City: Mowe</small></p>
+                          <p><small>State: Lagos State</small></p>
+                          <p><small>County: Nigeria</small></p>
+                      </div>
+      
+                      <div class="mt-3 mb-3 polo">
+                        <form action="">
+                          <div class="mb-3">
+                            <input type="radio" name="" id=""> &nbsp;
+                            Use the above Shipping address
+                          </div>
+      
+                          <div class="mb-3 d-block">
+                            <div>
+                              <label for="" class="pb-3">Aditional Note</label>
+                              <textarea name="" class="form-control shadow-none" placeholder="What else do you want to add" id="" cols="30" rows="5"></textarea>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    <!--  -->
+                      <div class="mt-3 mb-3">
+                        <h5><b>Shipping Method</b></h5>
+                        <form action="">
+                          <div class="mb-1 d-flex justify-content-between">
+                            <div>
+                              <input type="radio" name="" id=""> &nbsp;
+                              customer PickUp 
+                            </div>
+                            <p>Free</p>
+                          </div>
+                          <div class="mb-1 d-flex justify-content-between">
+                            <div>
+                              <input type="radio" name="" id=""> &nbsp;
+                              Interstate (Bus) 
+                            </div>
+                            <p>#4000</p>
+                          </div>
+                          <div class="mb-1 d-flex justify-content-between">
+                            <div>
+                              <input type="radio" name="" id=""> &nbsp;
+                              Interstate (Doorstep) 
+                            </div>
+                            <p>#4000</p>
+                          </div>
+                          <div class="mb-1 d-flex justify-content-between">
+                            <div>
+                              <input type="radio" name="" id=""> &nbsp;
+                              Mainland
+                            </div>
+                            <p>#3000</p>
+                          </div>
+                          <div class="mb-1 d-flex justify-content-between">
+                            <div>
+                              <input type="radio" name="" id=""> &nbsp;
+                              Within Island Delivery
+                            </div>
+                            <p>#3000</p>
+                          </div>  
+                        </form>
+                      </div>
+                    <!--  -->
+                    <div class="mt-3 mb-3 d-block bg-light rounded p-2">
+                      <h2 class="text-center">Order Summary</h2>
+                      <div class="card w-100">
+                        <span class="d-flex justify-content-between">
+                          <img src="/img/WhatsApp Image 2023-10-07 at 20.40.52 (2).jpeg" alt="" class="card-img-top ps-3 pt-2" style="width: 80px;">
+                          <div>
+                            <span>
+                              <h2>Luxuary wears</h2>
+                            </span>
+                            <h5><b>#12000</b></h5>
+                          </div>
+                        </span>
+                        <div class="card-body">
+                          <!-- <span class="d-flex justify-content-between">
+                            <div class="pb-3">
+                              <button type="submit" class="btn">Remove</button>
+                            </div>
+                    
+                            <div>
+                              <a href="" type="submit" class="btn"
+                                ><i class="fa-solid fa-trash-can"></i>&nbsp;Empty
+                                Cart</a>
+                            </div>
+                          </span> -->
+                    
+                          <span class="d-flex justify-content-between border-top pt-4 pb-5">
+                            <p>Cart Total</p>
+                            <h6><b>#45000</b></h6>
+                          </span>
+                          <span><small>Shipping fee will be added when checking out.</small></span>
+                    
+                          
+                        </div>
+                      </div>
+                      
+      
+                      <!--  -->
+                    </div>
+                    <!--  -->
+                    <div class="d-flex btn-box">
+                      <button type="button" class="btn w-100 m-1 p-3 susu" id="back1">Back</button>
+                      <button type="button" class="btn w-100 m-1 p-3 susu" id="next2">Checkout</button>
+                    </div>
+                  </div>
+                  <!-- content1 done -->
+                  
+                  <!-- content1 -->
+                    <div class="text-center forms" id="Form3">
+                      <h1>Thank you for Partronizing us</h1>
+                      <div class="d-flex btn-box">
+                        <button type="button" id="back2" class="btn w-100 m-1 p-3 susu">Back</button>
+                        <button type="button" class="btn w-100 m-1 p-3 susu">Proceed to make payemnt</button>
+                      </div>
+                    </div>            
+                  <!-- content1 done -->
+              </div>
+            </div>
+      
+            <!--  -->
+
+          </div>
+          <!-- -->
+          
+        </div>
+      </div>
+    </div>

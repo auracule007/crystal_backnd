@@ -1,0 +1,222 @@
+<div
+  class="modal fade"
+  id="authentication"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="authenticationLabel"
+  aria-hidden="true"
+  >
+  <!-- href="{{ login_url }}" -->
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <h5 class="modal-title" id="staticBackdropLabel">Login</h5> -->
+        <div class="container">
+          <button type="button" class="modal-title btn yoloss" id="login">
+            Login
+          </button>
+          <button
+            type="button"
+            class="modal-title yoloss btn ps-3"
+            id="register"
+          >
+            Register
+          </button>
+        </div>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body p-5">
+        <!-- login  -->
+        <div class="container" id="login-container">
+          <div class="cform">
+            <form action="{% url 'userLogin' %}" method="POST">
+              {% csrf_token %}
+              {% csrf_token %}
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="exampleInputText1" class="form-label"
+                  >Username</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Username"
+                  id="exampleInputText1"
+                  aria-describedby="emailHelp"
+                  name="username"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label"
+                  >Password</label
+                >
+                <input
+                  type="password"
+                  placeholder="password"
+                  class="form-control"
+                  id="exampleInputPassword1"
+                  name="password"
+                />
+              </div>
+              <button type="submit" class="btn w-100 yoloss">Submit</button>
+            </form>
+            <p><a href="{% url 'password_reset' %}">Forgotten your password?</a></p>
+          </div>
+        </div>
+        <!-- login done  -->
+
+        <!-- signup -->
+        <div class="container" id="register-container">
+          <div class="cform">
+            <form action="{% url 'userReg' %}" method="POST">
+            {% csrf_token %}
+              <div class="row justify-content-center">
+                <div class="col-12 col-md-6">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      name="username"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Username"
+                    />
+                    <label for="floatingInput">Username</label>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      name="first_name"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="First Name"
+                    />
+                    <label for="floatingInput">First Name</label>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      name="last_name"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Last Name"
+                    />
+                    <label for="floatingInput">Last Name</label>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="email"
+                      name="email"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Email Address"
+                    />
+                    <label for="floatingInput">Email Address</label>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      name="address"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Home Address"
+                    />
+                    <label for="floatingInput">Home address</label>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      name="city"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="City"
+                    />
+                    <label for="floatingInput">City</label>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      name="state"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="State"
+                    />
+                    <label for="floatingInput">State</label>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <div class="form-floating">
+                    <input
+                      type="password"
+                      name="password1"
+                      class="form-control"
+                      id="floatingPassword"
+                      placeholder="Password"
+                    />
+                    <label for="floatingPassword">Password</label>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 d-none">
+                  <div class="form-floating">
+                    <input
+                      type="hidden"
+                      name="pix"
+                      value="Profile/default_icon.jpg"
+                      class="form-control"
+                      id="floatingPassword"
+                      placeholder="Password"
+                    />
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <div class="form-floating">
+                    <input
+                      type="password"
+                      name="password2"
+                      class="form-control"
+                      id="floatingPassword"
+                      placeholder="Confirm Password"
+                    />
+                    <label for="floatingPassword">Confirm Password</label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 mt-3">
+                <button type="submit" class="btn w-100 w-md-50 p-3 yoloss">
+                  Signup
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- signup done -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <script type="text/javascript">
+  window.onload = function () {
+      if ("{{ show_modal }}" === "True") {
+          document.getElementById('login').click();
+      }
+  };
+</script> -->
