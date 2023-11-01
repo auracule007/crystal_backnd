@@ -133,12 +133,16 @@
                 data-bs-target="#cartcheckout"
               >
                 <i class="fa-solid fa-cart-shopping"></i>
-                <span
-                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                >
-                  9
-                  <span class="visually-hidden">unread messages</span>
-                </span>
+                
+                {% if cartcount > 0 %}
+                  <span
+                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                  >
+                    {{cartcount}}
+                    <span class="visually-hidden">unread messages</span>
+                  </span>
+                {% endif %}
+                  
               </a>
             </li>
           {% else %}
@@ -252,7 +256,7 @@
   <div class="d-block d-md-none sticky-top">
     <div class="header">
       <div class="logo">
-        <a href="/"><img src="/img/logo3.jpeg" width="100px" alt="" /></a>
+        <a href="/"><img src="{% static '' %}img/logo3.jpeg" width="100px" alt="" /></a>
       </div>
 
       <div class="navset">
@@ -287,7 +291,7 @@
             data-bs-target="#authentication"
               >
               {% if user.is_authenticated %}
-                 <img src="{{profile.pix.url}}" style="width: 40px; height: 40px; border-radius: 50%;object-fit: cover;" alt="" />
+                 <img src="{{profile.pix.url}}" style="width: 30px; height: 30px; border-radius: 50%;object-fit: cover;" alt="" />
               {% else %}
                   <img src="{% static '' %}img/default_icon.jpg" style="width: 40px; height: 40px; border-radius: 50%;object-fit: cover;" alt="">
               {% endif %}
@@ -321,15 +325,25 @@
                 
             </ul>
           </li>
-
-
           <li class="pe-2 ps-2">
             <a
               href=""
               data-bs-toggle="modal"
               data-bs-target="#cartcheckout2"
               ><i class="fa-solid fa-cart-shopping"></i
-            ></a>
+            >
+            {% if cartcount > 0 %}
+                  <small>
+                    <span
+                    class="position-absolute top-5 start-75 translate-middle badge rounded-pill bg-danger"
+                  >
+                    {{cartcount}}
+                    <span class="visually-hidden">unread messages</span>
+                  </span>
+                  </small>
+                {% endif %}
+          
+          </a>
           </li>
         </ul>
       </div>

@@ -275,30 +275,41 @@
                   <!-- content1 -->
                   <div class="p-1 forms" id="Form1" style="height: 500px;">
                     <!--  -->
+                    
+                    
+                    
+                    
                     <div class="card w-100">
+                      {% for items in trolley %}
                       <span class="d-flex justify-content-between">
-                        <img src="/img/WhatsApp Image 2023-10-07 at 20.40.52 (2).jpeg" alt="" class="card-img-top ps-3 pt-2" style="width: 80px;">
+                        <img src="{{items.product.stockImg.url}}" alt="" class="card-img-top ps-3 pt-2" style="width: 80px;">
                         <div>
                           <div class="d-flex cart-item">
                             <button class="cart-button minus">-</button>
                             <span class="item-quantity">1</span>
                             <button class="cart-button plus">+</button>&nbsp;
                           </div>
-                          <h5><b>#12000</b></h5>
+                          <h5><b>#{{items.amount}}</b></h5>
                         </div>
                       </span>
                       <div class="card-body">
                         <span class="d-flex justify-content-between">
                           <div class="pb-3">
-                            <button type="submit" class="btn">Remove</button>
+                            <form action="{% url 'delete_cart' %}" method="POST">
+                              {% csrf_token %}
+                              <input type="hidden" name="items_id" value="{{items.id}}">
+                              <button type="submit" class="btn" onclick="return confirm('Are you sure you want to remove item from cart?..')">Remove</button>
+                            </form>
+                            
                           </div>
-                  
-                          <div>
+                          
+                          <!-- <div>
                             <a href="" type="submit" class="btn"
-                              ><i class="fa-solid fa-trash-can"></i>&nbsp;Empty
-                              Cart</a>
-                          </div>
+                            ><i class="fa-solid fa-trash-can"></i>&nbsp;Empty
+                            Cart</a>
+                          </div> -->
                         </span>
+                        {% endfor %}
                   
                         <span class="d-flex justify-content-between border-top pt-4 pb-3">
                           <p>Cart Total</p>

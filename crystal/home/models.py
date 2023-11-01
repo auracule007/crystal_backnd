@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from uuid import uuid4
+from django.utils import timezone
+from django.utils.timezone import now 
 
 # Create your models here.
 
@@ -72,4 +74,14 @@ class Shopcart(models.Model):
 
     def __str__(self):
         return self.product.name
+    
+class Reviews(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE,related_name='reviews')
+    pix = models.ImageField(upload_to='Reviews', default="default_icon.jpg")
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Reviews by {self.name} on {self.product}'
     

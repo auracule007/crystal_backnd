@@ -23,4 +23,13 @@ class ShopcartForm(forms.ModelForm):
     class Meta:
         model = Shopcart 
         fields = ['quantity', 'size', 'color']
-    
+
+class ReviewsForm(forms.ModelForm):
+    class Meta:
+        model = Reviews 
+        fields = '__all__'
+        exclude = ['user', 'product', 'active']
+
+        # widgets = {
+        #     'body': forms.TextInput(attrs={'class':'form-control'})
+        # }

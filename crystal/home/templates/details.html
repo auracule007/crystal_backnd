@@ -151,12 +151,55 @@
     <div class="container mt-5 mb-5">
       <div class="card">
         <div class="card-header godoffire">
-          <h4><b>Reviews(0)</b></h4>
+          <h4><b>Reviews({{ product.num_reviews }} )</b></h4>
         </div>
         <div class="card-body">
-          <h5 class="card-title"></h5>
-          <p class="card-text"></p>
-          <!-- <a href="#" class="btn btn-primary"></a> -->
+           <!-- start -->
+           <div class="row justify-content-center">
+            <div class="col-12 col-md-7">
+              <div class="scroll1">
+
+                
+                {% for review in product.reviews.all %}
+                  <div class="mt-1 bebb">
+                    <div class="text-center align-items-center d-flex">
+                      <img src="{{reviews.profile.pix.url}}" class="hego1" alt="">&nbsp; &nbsp; 
+                      <h5>{{review.profile.first_name}}</h5>&nbsp;<h6>- <em>{{review.created}}</em></h6>
+                    </div>
+                    <div class="suki">
+                        <h6>{{review.body}}</h6>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+            
+            <div class="col-12 col-md-5">
+              <div class="cform">
+                <div class="ccform">
+                  <form action="{% url 'product_details' product.slug %}" method="POST">
+                  {% csrf_token %}
+                      <div class="mb-3">
+                        <textarea name="body" id="" class="form-control" cols="30" rows="10"></textarea>
+                        <label for="" class="pt-2">Enter your Review</label>
+                      </div>
+                      <!-- <div class="mb-3">
+                        <label for="exampleInputText1" class="form-label">Name</label>
+                        <input type="text" class="form-control" placeholder="Name" id="exampleInputText1" aria-describedby="emailHelp">
+                      </div> -->
+                      <!-- <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input type="email" class="form-control" placeholder="Email Address" id="exampleInputEmail1" aria-describedby="emailHelp">
+                      </div> -->
+                      <div class="mb-3">
+                        <button type="submit" class="btn btn-danger w-50 p-2">Review</button>
+                      </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+      <!-- finish -->
         </div>
       </div>
     </div>

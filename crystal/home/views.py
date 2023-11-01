@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from . forms import *
 from . models import *
+from django.db.models import Count
 
 # Create your views here.
 
@@ -14,7 +15,7 @@ def index(request):
     category = Category.objects.all().order_by('id')
     trolley = Shopcart.objects.filter(user__username=request.user.username, paid=False)
     product = Product.objects.all().order_by('id')
-    goods = Paginator(product, 4)
+    goods = Paginator(product, 10)
     mygoods = request.GET.get('page')
     mygoods_good = goods.get_page(mygoods)
 
@@ -31,17 +32,46 @@ def index(request):
 
     context = {
         'category': category,
+        # 'categories':categories,
         'mygoods_good':mygoods_good,
         'trolley':trolley,
         'total':total,
     }
     return render(request, 'index.html', context)
 
+def categories(request, slug):
+    categories = Product.objects.filter(category__slug=slug)
+    trolley = Shopcart.objects.filter(user__username=request.user.username, paid=False)
+    goods = Paginator(categories, 8)
+    mygoodies = request.GET.get('page')
+    mycat_goodies = goods.get_page(mygoodies)
+    context= {
+        'mycat_goodies':mycat_goodies,
+        'categories':categories,
+        'trolley':trolley,
+    }
+    # return redirect('categories')
+    return render(request, 'category.html', context)
 
 def product_details(request, slug):
-    product = get_object_or_404(Product, slug=slug)
+    product = get_object_or_404(Product.objects.annotate(num_reviews = Count('reviews')), slug=slug)
+    form = ReviewsForm()
+    if request.method == "POST":
+        form = ReviewsForm(request.POST)
+        if form.is_valid():
+            reviews = form.save(commit = False)
+            reviews.product = product
+            reviews.user = request.user.profile
+            reviews.save()
+            messages.success(request, "Thank you for patronizing us!...")
+            return redirect("product_details", slug=product.slug)
+        else:
+            messages.error(request, form.errors)
+            form = ReviewsForm()
+            return redirect('product_details')
     context = {
         'product':product,
+        'form': form,
     }
     return render(request, "details.html", context)
 
@@ -248,10 +278,13 @@ def delete_cart(request):
 
 def delallcart(request):
     if request.method == "POST":
-        allcart = request.method["allcart"]
-        delcart = Shopcart.objects.get(pk=allcart)
-        delcart.shopcartitem_set.all().delete()
-        messages.success(request, "Cart deleted")
+        allcart_id = request.POST.get("allcart")  # Get the 'allcart' value from the POST data
+        try:
+            delcart = Shopcart.objects.get(pk=allcart_id)
+            delcart.shopcartitem_set.all().delete()
+            messages.success(request, "Cart deleted")
+        except Shopcart.DoesNotExist:
+            messages.error(request, "Cart not found")
     return redirect('index')
 
 # def delallcart(request):

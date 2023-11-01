@@ -3,10 +3,11 @@ from . import views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    # product url
+    # product & category url
     path('', views.index, name='index'),
     path('product_details/<slug:slug>/', views.product_details, name="product_details"),
     path('modal_details/<slug:slug>/', views.modal_details, name="modal_details"),
+    path('categories/<slug:slug>/', views.categories, name="categories"),
 
     # Authentication Url
     path('userLogin/', views.userLogin, name="userLogin"),
@@ -20,7 +21,6 @@ urlpatterns = [
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name="password/password_reset_done.html"), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="password/password_reset_confirm.html"), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name="password/password_reset_complete.html"), name='password_reset_complete'),
-
 
     # SHopping url
     path('shopcart/<str:id>/', views.shopcart, name='shopcart'),
