@@ -163,8 +163,14 @@
                 {% for review in product.reviews.all %}
                   <div class="mt-1 bebb">
                     <div class="text-center align-items-center d-flex">
-                      <img src="{{reviews.profile.pix.url}}" class="hego1" alt="">&nbsp; &nbsp; 
-                      <h5>{{review.profile.first_name}}</h5>&nbsp;<h6>- <em>{{review.created}}</em></h6>
+                      
+                      {% if user.is_authenticated %}
+                        <img src="{{ review.user.profile.pix.url }}" class="hego1" alt="" style="width: 50px; height: 50px; border-radius: 50%;">&nbsp; &nbsp; 
+                      {% else %}
+                        <img src="{% static '' %}img/default_icon.jpg" class="hego1" alt="" style="width: 50px; height: 50px; border-radius: 50%;">&nbsp; &nbsp; 
+                      {% endif %}
+                        
+                      <h5>{{ review.user.first_name }}&nbsp;{{ review.user.last_name }}</h5>&nbsp;<h6>- <em>{{review.created}}</em></h6>
                     </div>
                     <div class="suki">
                         <h6>{{review.body}}</h6>
@@ -180,13 +186,13 @@
                   <form action="{% url 'product_details' product.slug %}" method="POST">
                   {% csrf_token %}
                       <div class="mb-3">
+                        <label for="" class="pt-2 pb-3">Enter your Review</label>
                         <textarea name="body" id="" class="form-control" cols="30" rows="10"></textarea>
-                        <label for="" class="pt-2">Enter your Review</label>
                       </div>
-                      <!-- <div class="mb-3">
+                      <div class="mb-3">
                         <label for="exampleInputText1" class="form-label">Name</label>
-                        <input type="text" class="form-control" placeholder="Name" id="exampleInputText1" aria-describedby="emailHelp">
-                      </div> -->
+                        <input type="text" name="user" value="{{user.username}}" class="form-control" placeholder="Name" id="exampleInputText1" aria-describedby="emailHelp">
+                      </div>
                       <!-- <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
                         <input type="email" class="form-control" placeholder="Email Address" id="exampleInputEmail1" aria-describedby="emailHelp">

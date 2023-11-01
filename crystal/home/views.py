@@ -54,6 +54,7 @@ def categories(request, slug):
     return render(request, 'category.html', context)
 
 def product_details(request, slug):
+    profile = Profile.objects.filter(user__username=request.user.username)
     product = get_object_or_404(Product.objects.annotate(num_reviews = Count('reviews')), slug=slug)
     form = ReviewsForm()
     if request.method == "POST":
@@ -61,7 +62,8 @@ def product_details(request, slug):
         if form.is_valid():
             reviews = form.save(commit = False)
             reviews.product = product
-            reviews.user = request.user.profile
+            if request.user.is_authenticated:
+                review.user = request.user
             reviews.save()
             messages.success(request, "Thank you for patronizing us!...")
             return redirect("product_details", slug=product.slug)
@@ -72,6 +74,7 @@ def product_details(request, slug):
     context = {
         'product':product,
         'form': form,
+        'profile': profile,
     }
     return render(request, "details.html", context)
 

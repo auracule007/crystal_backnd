@@ -77,7 +77,7 @@ class Shopcart(models.Model):
     
 class Reviews(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE,related_name='reviews')
+    user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='reviews', null=True, blank=True)
     pix = models.ImageField(upload_to='Reviews', default="default_icon.jpg")
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
